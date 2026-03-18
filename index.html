@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DUMPZONE — Temporary File Transfer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- Noise overlay -->
+  <div class="noise"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">DUMPZONE</span>
+    </div>
+    <p class="tagline">Drop files. Share instantly. Auto-expires in 24h.</p>
+    <div class="status-bar">
+      <span class="dot pulse"></span>
+      <span id="statusText">Ready to receive files</span>
+    </div>
+  </header>
+
+  <!-- Main Grid -->
+  <main>
+
+    <!-- LEFT: Upload Panel -->
+    <section class="panel upload-panel">
+      <div class="panel-label">01 / UPLOAD</div>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="drop-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8 L32 42 M20 30 L32 42 L44 30" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 48 L12 56 L52 56 L52 48" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="drop-title">Drag & Drop Files Here</p>
+        <p class="drop-sub">or click to browse — any file, any size</p>
+        <input type="file" id="fileInput" multiple hidden />
+        <button class="btn-browse" id="browseBtn">BROWSE FILES</button>
+      </div>
+
+      <!-- File Queue -->
+      <div class="file-queue" id="fileQueue">
+        <div class="queue-header">
+          <span>QUEUED FILES</span>
+          <button class="btn-clear" id="clearAllBtn">CLEAR ALL</button>
+        </div>
+        <ul id="fileList"></ul>
+      </div>
+
+      <!-- Upload Button -->
+      <button class="btn-upload" id="uploadBtn" disabled>
+        <span class="btn-label">UPLOAD & GENERATE LINK</span>
+        <span class="btn-arrow">→</span>
+      </button>
+    </section>
+
+    <!-- RIGHT: Receive / Transfer Panel -->
+    <section class="panel receive-panel">
+      <div class="panel-label">02 / TRANSFER</div>
+
+      <!-- Active Drops -->
+      <div class="active-drops" id="activeDrops">
+        <div class="empty-state" id="emptyState">
+          <span class="empty-icon">◫</span>
+          <p>No active drops yet.<br/>Upload files to generate a share link.</p>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"><span>OR RECEIVE</span></div>
+
+      <!-- Code Input -->
+      <div class="code-input-area">
+        <p class="section-hint">Enter a drop code to fetch files from another device</p>
+        <div class="code-input-row">
+          <input type="text" id="codeInput" placeholder="PASTE DROP CODE HERE" maxlength="8" />
+          <button class="btn-fetch" id="fetchBtn">FETCH →</button>
+        </div>
+        <div class="fetched-result" id="fetchedResult"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Upload Progress Overlay -->
+  <div class="progress-overlay" id="progressOverlay">
+    <div class="progress-box">
+      <div class="progress-label" id="progressLabel">Uploading...</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <div class="progress-pct" id="progressPct">0%</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
